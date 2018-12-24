@@ -1,50 +1,37 @@
 {
-  "name": "staart-example",
+  "name": "graphql-with-auth",
   "version": "0.0.0",
-  "description": "",
+  "description": "This is an example of a protected graphql API, to which the user will need to authenticate using a JWT. This example API needs to be running for these example projects to work:",
   "main": "index.js",
   "scripts": {
     "bootstrap": "npm install && (cp -n .env.dist .env || true) && (cp -n .env.docker.dist .env.docker || true)",
     "dev": "nodemon .",
-    "build": "next build",
-    "start": "node ."
+    "start": "wait-for-it -t 30 $MONGO_HOST:$MONGO_PORT && wait-for-it -t 30 $REDIS_HOST:$REDIS_PORT && node index.js"
   },
   "author": "Nicola Marcacci Rossi <nicolamr@gmail.com> (http://nmr.io)",
   "license": "MIT",
   "dependencies": {
-    "compose-next": "^2.6.0",
+    "apollo-server-express": "^2.3.1",
+    "body-parser": "^1.18.3",
+    "connect-redis": "^3.4.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^6.1.0",
-    "express": "^4.16.2",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "graphql": "^14.0.2",
-    "graphql-server-express": "^1.2.0",
-    "graphql-tag": "^2.5.0",
     "graphql-tools": "^4.0.3",
-    "mailcomposer": "^4.0.2",
-    "mailgun-js": "^0.21.0",
     "mongodb": "^3.1.10",
     "morgan": "^1.9.0",
-    "next": "^7.0.2",
     "node-wait-for-it": "^0.2.0",
-    "ooth": "^2.9.0",
-    "ooth-client": "^2.6.0",
-    "ooth-client-react": "^2.6.0",
-    "ooth-client-react-next": "^2.6.0",
-    "ooth-client-react-next-apollo": "^2.8.0",
-    "ooth-facebook": "^2.9.0",
-    "ooth-google": "^2.9.0",
-    "ooth-local": "^2.9.0",
-    "ooth-local-emailer": "^2.9.0",
-    "ooth-mongo": "^2.6.0",
-    "ooth-user": "^2.9.0",
-    "react": "^16.6.3",
-    "react-apollo": "^2.3.1",
-    "react-dom": "^16.6.3",
-    "staart": "^4.4.2"
+    "nodeify": "^1.0.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=10"
   },
   "devDependencies": {
-    "babili-webpack-plugin": "^0.1.2",
-    "nodemon": "^1.18.7"
+    "nodemon": "^1.18.9"
   }
 }
